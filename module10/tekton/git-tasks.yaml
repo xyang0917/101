@@ -33,14 +33,14 @@ kind: TaskRun
 metadata:
   name: github-build
 spec:
-  serviceAccountName: cncamp-sa
+  serviceAccountName: xyang0917-sa
   taskRef:
     name: github-build
   resources:
     inputs:
     - name: repo
       resourceRef:
-        name: cncamp-golang
+        name: xyang0917-golang
   workspaces:
   - name: dockerconfig
     secret:

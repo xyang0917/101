@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: cncamp-golang
+  name: xyang0917-golang
 spec:
   type: git
   params:
@@ -40,6 +40,6 @@ stringData:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: cncamp-sa
+  name: xyang0917-sa
 secrets:
 - name: docker-auth
