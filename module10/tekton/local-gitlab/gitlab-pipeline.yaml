@@ -114,7 +114,7 @@ spec:
     - name: prepare
       taskSpec:
         steps:
-          name: print-params
+        - name: print-params
           image: ubuntu
           script: |
             #!/usr/bin/env bash
