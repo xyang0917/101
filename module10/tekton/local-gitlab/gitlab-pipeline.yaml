@@ -121,13 +121,14 @@ spec:
             echo "$URL"
             echo "$REVISION"
             echo "$IMAGE_REGISTRY"
-      params:
-        - name: url
-          value: $(params.repo-url)
-        - name: revision
-          value: $(params.repo-version)
-        - name: image-registry
-          value: $(params.image-registry)
+            echo "params.url: $(params.url)"
+        params:
+          - name: url
+            value: $(params.repo-url)
+          - name: revision
+            value: $(params.repo-version)
+          - name: image-registry
+            value: $(params.image-registry)
     - name: fetch-source
       runAfter: ["prepare"]
       taskRef:
