@@ -111,9 +111,9 @@ spec:
           image: ubuntu
           env:
             - name: URL
-              value: $(params.url)
+              value: $(params.repo-url)
             - name: REVISION
-              value: $(params.revision)
+              value: $(params.repo-version)
             - name: IMAGE_REGISTRY
               value: $(params.image-registry)
           script: |
@@ -122,13 +122,13 @@ spec:
             echo "$REVISION"
             echo "$IMAGE_REGISTRY"
             echo "params.url: $(params.url)"
-        params:
-          - name: url
-            value: $(params.repo-url)
-          - name: revision
-            value: $(params.repo-version)
-          - name: image-registry
-            value: $(params.image-registry)
+        # params:
+        #   - name: url
+        #     value: $(params.repo-url)
+        #   - name: revision
+        #     value: $(params.repo-version)
+        #   - name: image-registry
+        #     value: $(params.image-registry)
     - name: fetch-source
       runAfter: ["prepare"]
       taskRef:
