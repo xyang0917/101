@@ -121,6 +121,13 @@ spec:
             echo "$(params.repo-url)"
             echo "$(params.repo-version)"
             echo "$(params.image-registry)"
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.repo-version)
+        - name: IMAGE
+          value: $(params.image-registry)
     - name: fetch-source
       taskRef:
         name: git-clone
