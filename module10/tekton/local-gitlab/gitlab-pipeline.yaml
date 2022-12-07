@@ -131,6 +131,13 @@ spec:
             type: string
           - name: image-registry
             type: string
+      params:
+        - name: repo-url
+          value: $(params.repo-url)
+        - name: repo-version
+          value: $(params.repo-version)
+        - name: image-registry
+          value: $(params.image-registry)
     - name: fetch-source
       runAfter: ["prepare"]
       taskRef:
