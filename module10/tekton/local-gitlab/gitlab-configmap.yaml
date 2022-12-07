@@ -6,4 +6,4 @@ metadata:
   labels:
     app: devops
 data:
-  httpserver: https://registry.cn-hongkong.aliyuncs.com/yangxin/httpserver
+  petclinic: https://registry.cn-hongkong.aliyuncs.com/yangxin/petclinic

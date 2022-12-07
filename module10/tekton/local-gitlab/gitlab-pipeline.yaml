@@ -34,6 +34,8 @@ spec:
       value: $(body.checkout_sha) 
     - name: gitrepositoryurl
       value: $(body.project.git_http_url)
+    - name: gitreponame
+      value: $(body.project.name)
 
 ---
 apiVersion: triggers.tekton.dev/v1beta1 
@@ -46,6 +48,8 @@ spec:
       description: GIT仓库代码版本
     - name: gitrepositoryurl
       description: GIT仓库地址
+    - name: gitreponame
+      description: 代码仓库名称
   resourcetemplates:
     - kind: PipelineRun
       apiVersion: tekton.dev/v1beta1
@@ -60,7 +64,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: ci-article-registry
-              key: petclinic
+              key: ${params.gitreponame}
         params:
           - name: repo-url
             value: $(params.gitrepositoryurl)
