@@ -118,9 +118,9 @@ spec:
           image: ubuntu
           script: |
             #!/usr/bin/env bash
-            echo "$(params.repo-url)"
-            echo "$(params.repo-version)"
-            echo "$(params.image-registry)"
+            echo "$(params.url)"
+            echo "$(params.revision)"
+            echo "$(params.IMAGE)"
       params:
         - name: url
           value: $(params.repo-url)
