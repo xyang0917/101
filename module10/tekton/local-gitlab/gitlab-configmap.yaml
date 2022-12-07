@@ -5,5 +5,5 @@ metadata:
   name: ci-article-registry
   labels:
     app: devops
-stringData:
-  test: https://registry.cn-hongkong.aliyuncs.com/yangxin/test
+data:
+  httpserver: https://registry.cn-hongkong.aliyuncs.com/yangxin/httpserver

@@ -60,7 +60,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: ci-article-registry
-              key: test
+              key: petclinic
         params:
           - name: repo-url
             value: $(params.gitrepositoryurl)
@@ -101,7 +101,7 @@ spec:
       type: string
     - name: image-registry
       type: string
-  workspace:
+  workspaces:
     - name: shared-data
     - name: docker-credentials
     - name: git-credentials
@@ -109,7 +109,7 @@ spec:
     - name: fetch-source
       taskRef:
         name: git-clone
-      workspace:
+      workspaces:
         - name: output
           workspace: shared-data
         - name: basic-auth
@@ -126,7 +126,7 @@ spec:
       params:
         - name: IMAGE
           value: $(params.image-registry)
-      workspace:
+      workspaces:
         - name: source
           workspace: shared-data
         - name: dockerconfig
