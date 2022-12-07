@@ -55,17 +55,17 @@ spec:
       apiVersion: tekton.dev/v1beta1
       metadata:
         generateName: gitlab-pipeline-run-
-      podTemplate:
-        env:
-        - name: IMAGE_REGISTRY
-          valueFrom:
-            configMapKeyRef:
-              name: ci-article-registry
-              key: ${params.gitreponame}
       spec: 
         serviceAccountName: gitlab-sa
         pipelineRef:
           name: clone-build-push
+        podTemplate:
+          env:
+          - name: IMAGE_REGISTRY
+            valueFrom:
+              configMapKeyRef:
+                name: ci-article-registry
+                key: ${params.gitreponame}
         params:
           - name: repo-url
             value: $(params.gitrepositoryurl)
