@@ -65,7 +65,7 @@ spec:
           - name: repo-version
             value: $(tt.params.gitrevision)
           - name: image-registry
-            value: https://registry.cn-hongkong.aliyuncs.com/yangxin/$(tt.params.gitreponame):$(tt.params.gitrevision)
+            value: registry.cn-hongkong.aliyuncs.com/yangxin/$(tt.params.gitreponame):$(tt.params.gitrevision)
         workspaces:
           - name: shared-data
             volumeClaimTemplate:
@@ -121,9 +121,9 @@ spec:
               value: $(params.image-registry)
           script: |
             #!/usr/bin/env bash
-            echo $URL
-            echo $REVISION
-            echo $IMAGE_REGISTRY
+            echo "仓库地址：$URL"
+            echo "代码版本：$REVISION"
+            echo "镜像地址：$IMAGE_REGISTRY"
         params:
           - name: repo-url
             type: string
