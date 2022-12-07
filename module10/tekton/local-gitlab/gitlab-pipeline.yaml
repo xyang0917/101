@@ -109,11 +109,18 @@ spec:
         steps:
         - name: print-params
           image: ubuntu
+          env:
+            - name: URL
+              value: $(params.url)
+            - name: REVISION
+              value: $(params.revision)
+            - name: IMAGE_REGISTRY
+              value: $(params.image-registry)
           script: |
             #!/usr/bin/env bash
-            echo "$(params.url)"
-            echo "$(params.revision)"
-            echo "$(params.image-registry)"
+            echo "$URL"
+            echo "$REVISION"
+            echo "$IMAGE_REGISTRY"
       params:
         - name: url
           value: $(params.repo-url)
