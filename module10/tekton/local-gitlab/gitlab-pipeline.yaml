@@ -111,13 +111,16 @@ spec:
     - name: docker-credentials
     - name: git-credentials
   tasks:
-    - name: print-params
-      image: ubuntu
-      script: |
-        #!/usr/bin/env bash
-        echo "$(params.repo-url)"
-        echo "$(params.repo-version)"
-        echo "$(params.image-registry)"
+    - name: prepare
+      taskSpec:
+        steps:
+          name: print-params
+          image: ubuntu
+          script: |
+            #!/usr/bin/env bash
+            echo "$(params.repo-url)"
+            echo "$(params.repo-version)"
+            echo "$(params.image-registry)"
     - name: fetch-source
       taskRef:
         name: git-clone
