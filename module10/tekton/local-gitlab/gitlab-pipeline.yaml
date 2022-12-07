@@ -113,7 +113,7 @@ spec:
   tasks:
     - name: print-params
       image: ubuntu
-      args: |
+      script: |
         #!/usr/bin/env bash
         echo "$(params.repo-url)"
         echo "$(params.repo-version)"
