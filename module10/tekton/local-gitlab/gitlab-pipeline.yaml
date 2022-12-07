@@ -64,8 +64,8 @@ spec:
             value: $(params.gitrepositoryurl)
           - name: repo-version
             value: $(params.gitrevision)
-          - name: repo-name
-            value: $(params.gitreponame)
+          - name: image-registry
+            value: https://registry.cn-hongkong.aliyuncs.com/yangxin/$(params.gitreponame)
         workspace:
           - name: shared-data
             volumeClaimTemplate:
@@ -97,7 +97,7 @@ spec:
       type: string
     - name: repo-version
       type: string
-    - name: repo-name
+    - name: image-registry
       type: string
   workspaces:
     - name: shared-data
@@ -138,16 +138,9 @@ spec:
       runAfter: ["fetch-source"]
       taskRef:
         name: kaniko
-      stepTemplate:
-          env:
-          - name: IMAGE_REGISTRY
-            valueFrom:
-              configMapKeyRef:
-                name: ci-article-registry
-                key: ${params.repo-name}
       params:
         - name: IMAGE
-          value: $IMAGE_REGISTRY:${params.repo-version}
+          value: ${params.image-registry}
       workspaces:
         - name: source
           workspace: shared-data
