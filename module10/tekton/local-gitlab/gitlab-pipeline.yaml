@@ -49,7 +49,7 @@ spec:
     - name: gitrepositoryurl
       description: GIT仓库地址
     - name: gitreponame
-      description: 代码仓库名称
+      description: GIT仓库名称
   resourcetemplates:
     - kind: PipelineRun
       apiVersion: tekton.dev/v1beta1
@@ -95,10 +95,13 @@ spec:
   params:
     - name: repo-url
       type: string
+      description: 代码仓库地址
     - name: repo-version
       type: string
+      description: 代码仓库版本
     - name: image-registry
       type: string
+      description: 代码构建镜像
   workspaces:
     - name: shared-data
     - name: docker-credentials
@@ -123,11 +126,11 @@ spec:
             echo $IMAGE_REGISTRY
         params:
           - name: repo-url
-            value: $(params.repo-url)
+            type: string
           - name: repo-version
-            value: $(params.repo-version)
+            type: string
           - name: image-registry
-            value: $(params.image-registry)
+            type: string
     - name: fetch-source
       runAfter: ["prepare"]
       taskRef:
