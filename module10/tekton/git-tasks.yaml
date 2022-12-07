@@ -19,9 +19,9 @@ spec:
     image: gcr.io/kaniko-project/executor:debug
     workingDir: /workspace/repo
     args:
-    - "--dockerfile=./httpserver/Dockerfile"
+    - "--dockerfile=$(params.DOCKERFILE)"
     - "--context=./httpserver"
-    - "--destination=registry.cn-hongkong.aliyuncs.com/yangxin/httpserver:v1.0"
+    - "--destination=$(params.IMAGE)"
   workspaces:
   - name: dockerconfig
     description: Includes a docker `config.json`

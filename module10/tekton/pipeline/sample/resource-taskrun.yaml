@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: volume-taskrun
+  namespace: default
+spec:
+  taskRef:
+    name: volume-task
+  resources:
+    inputs:
+      - name: workspace
+        resourceRef:
+          name: java-git-resource
+    outputs:
+      - name: workspace
+        paths:
+          - /custom/workspace/
+        resourceRef:
+          name: java-git-resource
+  podTemplate:
+    volumes:
+      - name: custom-volume
+        emptyDir: {}

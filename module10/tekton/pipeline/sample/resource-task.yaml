@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: volume-task
+  namespace: default
+spec:
+  resources:
+    inputs:
+      - name: workspace
+        type: git
+    outputs:
+      - name: workspace
+        type: storage
+  steps:
+    - name: build-war
+      image: objectuser/run-java-jar #https://hub.docker.com/r/objectuser/run-java-jar/
+      command: ["jar"]
+      args: ["-cvf", "projectname.war", "*"]
+      volumeMounts:
+        - name: custom-volume
+          mountPath: /custom
+    - name: pause
+      image: docker
+      args: ["sleep", "6000"]
