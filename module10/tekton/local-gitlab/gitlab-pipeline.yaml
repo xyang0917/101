@@ -65,7 +65,7 @@ spec:
           - name: repo-version
             value: $(tt.params.gitrevision)
           - name: image-registry
-            value: https://registry.cn-hongkong.aliyuncs.com/yangxin/$(tt.params.gitreponame)
+            value: https://registry.cn-hongkong.aliyuncs.com/yangxin/$(tt.params.gitreponame):$(tt.params.gitrevision)
         workspaces:
           - name: shared-data
             volumeClaimTemplate:
