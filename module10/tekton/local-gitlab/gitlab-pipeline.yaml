@@ -59,20 +59,13 @@ spec:
         serviceAccountName: gitlab-sa
         pipelineRef:
           name: clone-build-push
-        podTemplate:
-          env:
-          - name: IMAGE_REGISTRY
-            valueFrom:
-              configMapKeyRef:
-                name: ci-article-registry
-                key: ${params.gitreponame}
         params:
           - name: repo-url
             value: $(params.gitrepositoryurl)
           - name: repo-version
             value: $(params.gitrevision)
-          - name: image-registry
-            value: $IMAGE_REGISTRY:${params.gitrevision}
+          - name: repo-name
+            value: $(params.gitreponame)
         workspace:
           - name: shared-data
             volumeClaimTemplate:
@@ -104,7 +97,7 @@ spec:
       type: string
     - name: repo-version
       type: string
-    - name: image-registry
+    - name: repo-name
       type: string
   workspaces:
     - name: shared-data
@@ -145,9 +138,16 @@ spec:
       runAfter: ["fetch-source"]
       taskRef:
         name: kaniko
+      stepTemplate:
+          env:
+          - name: IMAGE_REGISTRY
+            valueFrom:
+              configMapKeyRef:
+                name: ci-article-registry
+                key: ${params.repo-name}
       params:
         - name: IMAGE
-          value: $(params.image-registry)
+          value: $IMAGE_REGISTRY:${params.repo-version}
       workspaces:
         - name: source
           workspace: shared-data
