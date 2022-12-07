@@ -104,24 +104,25 @@ spec:
     - name: docker-credentials
     - name: git-credentials
   tasks:
-    # - name: prepare
-    #   taskSpec:
-    #     steps:
-    #     - name: print-params
-    #       image: ubuntu
-    #       script: |
-    #         #!/usr/bin/env bash
-    #         echo "$(params.url)"
-    #         echo "$(params.revision)"
-    #         echo "$(params.IMAGE)"
-    #   params:
-    #     - name: url
-    #       value: $(params.repo-url)
-    #     - name: revision
-    #       value: $(params.repo-version)
-    #     - name: IMAGE
-    #       value: $(params.image-registry)
+    - name: prepare
+      taskSpec:
+        steps:
+        - name: print-params
+          image: ubuntu
+          script: |
+            #!/usr/bin/env bash
+            echo "$(params.url)"
+            echo "$(params.revision)"
+            echo "$(params.image-registry)"
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.repo-version)
+        - name: image-registry
+          value: $(params.image-registry)
     - name: fetch-source
+      runAfter: ["prepare"]
       taskRef:
         name: git-clone
       workspaces:
